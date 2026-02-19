@@ -456,7 +456,7 @@ individual project.
 │                    YOUR AGENT PIPELINES                      │
 │                                                             │
 │  Pipeline A    Pipeline B    Pipeline C    Pipeline D       │
-│  (Minecraft)   (Compliance)  (Reports)    (Code Gen)       │
+│  (DB Visualizer) (HR App)  (Reports)    (Code Gen)           │
 │       │             │            │             │            │
 └───────┼─────────────┼────────────┼─────────────┼────────────┘
         │             │            │             │
