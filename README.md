@@ -20,28 +20,9 @@ A pattern and service layer that adds structured adversarial review to any AI ag
 
 Most agent pipelines trust unchallenged AI output as source of truth. This pattern inserts deterministic checkpoints and adversarial evaluation at every handoff — the difference between a system that demos well and one that can be trusted in production.
 
-## Published
-
-- **LinkedIn article:** ["Why Agents Need a Team of Skeptics"](https://www.linkedin.com/pulse/why-agents-need-team-skeptics-michael-mcclary-y8bac/) — Feb 2026
-
-## Project Structure
-
-```
-Skeptics/
-├── README.md               ← You are here
-├── docs/
-│   └── team-of-skeptics.md ← Foundational reference (context, prompts, code, anti-patterns)
-├── src/                    ← Future: Semantic Kernel C# implementation
-│   └── (empty — next step)
-├── prompts/                ← Future: Versioned system prompts as standalone files
-│   └── (empty — next step)
-└── examples/               ← Future: Sample inputs + expected skeptic reports
-    └── (empty — next step)
-```
-
 
 
 ## Source Material
 
-- [Foundational reference doc](docs/team-of-skeptics.md) — full context, all five skeptic definitions, structured prompts, C# code example, anti-patterns, extension guide
+- [Foundational reference doc](docs/team-of-skeptics.md) — full context, all five skeptic definitions, structured prompts, anti-patterns, extension guide
 - [LinkedIn article](https://www.linkedin.com/pulse/why-agents-need-team-skeptics-michael-mcclary-y8bac/) — published summary

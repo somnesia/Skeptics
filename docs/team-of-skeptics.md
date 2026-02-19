@@ -1,6 +1,9 @@
 # The Team of Skeptics: Enhancing Quality for AI Agent Systems
 
-*Michael McClary — February 2026*
+*Views expressed are my own and not necessarily those of my employer. Code samples are provided as-is for learning purposes, test thoroughly before using in production*
+
+
+*February 2026*
 *Companion to: ["Why Agents Need a Team of Skeptics"](https://www.linkedin.com/pulse/why-agents-need-team-skeptics-michael-mcclary-y8bac/)*
 
 > *The best outputs do not need protection from scrutiny. They earn trust
