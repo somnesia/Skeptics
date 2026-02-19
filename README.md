@@ -39,24 +39,7 @@ Skeptics/
     └── (empty — next step)
 ```
 
-## Key Decisions
 
-| Date | Decision | Rationale |
-|------|----------|-----------|
-| 2026-02-18 | Five skeptics, not one super-reviewer | Single mandates produce dramatically better results than multi-mandate prompts |
-| 2026-02-18 | Deterministic middleware, not AI gatekeeping | Go/no-go decisions made by code, never by another AI |
-| 2026-02-18 | Semantic Kernel (C#) for reference impl | Matches .NET background, Microsoft ecosystem |
-| 2026-02-19 | Separated into own project | Pattern is framework-agnostic; deserves its own repo, not buried in MinecraftBuilder |
-
-## Build Order
-
-1. [ ] Extract C# code example into compilable `src/` project
-2. [ ] Extract system prompts into versioned `prompts/` files
-3. [ ] Create example inputs with known errors for testing
-4. [ ] Wire up Azure OpenAI and run end-to-end
-5. [ ] Build as NuGet package / shared library
-6. [ ] Integrate into Minecraft Builder pipeline as first consumer
-7. [ ] Write follow-up article with real production results
 
 ## Source Material
 
