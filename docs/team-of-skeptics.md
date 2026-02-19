@@ -39,8 +39,7 @@ The agent that *produces* the work is also implicitly trusted to *evaluate* its 
 work. This is the equivalent of letting a student grade their own exam. The output
 may be fluent, confident, properly formatted... and completely wrong.
 
-In traditional software, we solved this decades ago. We don't ship code without
-tests. We don't merge without review. We don't deploy without monitoring. But in
+In traditional software, we (hopefully) don't ship code without tests. We don't merge without review. We don't deploy without monitoring. But in
 AI agent systems, most teams skip all three equivalents because the output *looks*
 right.
 
@@ -92,16 +91,13 @@ way to prove it wrong."* Trust in our systems should be the result of structured
 attempts to find fault. Where Colin Chapman added lightness to Lotus, the path
 to reliable and predictable behaviour in multi-agent systems is to **add scrutiny** with well-formed, hardened skeptics.
 
-The scientific method doesn't trust any single experiment. It requires independent
-replication, peer review, and active attempts at falsification. A hypothesis only
-earns trust after it has *survived* serious attempts to disprove it.
 
-AI agent systems need the same structure. **Quality is not a review step. It is an
+AI agent systems need the same foundation. **Quality is not a review step. It is an
 architectural layer.** The agents that produce work must be structurally separated
 from the agents that evaluate it, and evaluation must happen through multiple
 independent lenses.
 
-This is the Team of Skeptics: a set of five specialised quality agents, each with
+I've been exploring and building the Team of Skeptics: a set of five specialised quality agents, each with
 a distinct evaluation mandate, that can be composed into any agent pipeline to
 provide systematic, multi-dimensional verification.
 
@@ -116,7 +112,7 @@ provide systematic, multi-dimensional verification.
    than one "review agent" with a vague instruction.
 
 3. **Structured output.** Every skeptic produces machine-readable verdicts with
-   severity, location, and reasoning — not prose commentary. This enables
+   severity, location, and reasoning, not prose commentary. This enables
    automation, aggregation, and trend analysis.
 
 4. **Composability.** The skeptics are independent services. Use one, use all five,
@@ -162,9 +158,8 @@ errors of the last.
 
 ## The Five Skeptics
 
-Each skeptic has a single, non-overlapping mandate. They are named for their
-function, not for a persona, because in production systems, clarity beats
-creativity.
+Each skeptic has a single, non-overlapping mandate and named for their
+function.
 
 ### Overview
 
@@ -314,7 +309,7 @@ prior outputs in the pipeline, and any relevant knowledge base entries.
 - It doesn't check internal consistency (that's the Cross-Checker)
 
 **When to use:**
-- As the final skeptic in any pipeline — the last gate before delivery
+- As the final skeptic in any pipeline: the last gate before delivery
 - For outputs driven by explicit requirements (specifications, briefs, contracts)
 - When clients/stakeholders have stated specific expectations
 
@@ -398,7 +393,7 @@ outputs of earlier ones:
 
 ### The Retry Loop
 
-When skeptics find issues, the system doesn't just report them, it acts:
+When skeptics find issues, we determine how to respond and trigger follow-up action:
 
 ```
 Severity: CRITICAL  → Automatic retry with findings injected into producer prompt
@@ -408,7 +403,7 @@ Severity: LOW       → Log, deliver, monitor over time
 ```
 
 The retry prompt includes the *specific findings* from the skeptics, not a
-generic "try again." This is targeted revision, not blind regeneration.
+generic "try again." 
 
 **Critical:** The retry decision is made by deterministic code, not by a
 "manager agent." The severity thresholds, retry limits, and escalation rules
@@ -426,7 +421,7 @@ becomes a decision.**
 This pattern is particularly powerful when combined with the Falsifier: run two
 Falsifiers with different temperatures or different models. If both flag the same
 claim, it's almost certainly worth investigating. If only one flags it, you've
-found a boundary worth exploring. The divergence *is* the signal.
+found a boundary worth exploring.  
 
 ### When to Use Subsets
 
@@ -445,7 +440,7 @@ Not every output needs all five skeptics. Match the combination to the risk:
 
 ## Designing for Reuse: The Skeptic Service Layer
 
-The skeptics should be built as a **shared service layer**
+Ideally, the skeptics should be built as a **shared service layer**
 
 ### Architecture
 
@@ -536,8 +531,7 @@ contract is the same regardless of which skeptic you're calling:
    horizontally scalable and easy to test.
 
 2. **Model-agnostic.** The prompts work with any capable LLM. The service layer
-   abstracts the model choice — swap GPT-4o for Claude or a local model without
-   changing the calling code.
+   abstracts the model choice.
 
 3. **Observable.** Every call is logged with the request, response, model used,
    latency, and token count. This enables cost tracking, quality monitoring, and
@@ -604,8 +598,7 @@ For every testable claim you find, provide:
 - claim: The exact text of the claim being challenged
 - issue: Why this claim is suspect or risky
 - suggested_test: A specific, concrete test that would disprove this claim
-  if it were wrong (e.g., "Check the FAA database for Part 107 waiver
-  approval rates to verify the stated 10% figure")
+  if it were wrong (e.g., "Check the HR database for approval rates to verify the stated 10% figure")
 
 Scoring guide:
 - critical: If this claim is wrong, the entire output is invalidated
@@ -809,14 +802,14 @@ add specialised skeptics:
 
 ### The Pattern for Adding a New Skeptic
 
-1. **Define the mandate** — one sentence, one dimension of quality.
-2. **Write the system prompt** — specific instructions, typed output schema,
+1. **Define the mandate** one sentence, one dimension of quality.
+2. **Write the system prompt** specific instructions, typed output schema,
    severity guide, and explicit scope boundaries ("you do NOT check X").
-3. **Decide where it fits in the pipeline** — parallel with the verifiers?
+3. **Decide where it fits in the pipeline** parallel with the verifiers?
    Before the Closer? After a specific producer agent?
-4. **Add to the service contract** — same `SkepticRequest` / `SkepticReport`
+4. **Add to the service contract** same `SkepticRequest` / `SkepticReport`
    schema, new enum value.
-5. **Test with known-bad inputs** — create content with deliberate errors in the
+5. **Test with known-bad inputs** create content with deliberate errors in the
    new skeptic's domain and verify it catches them.
 
 ---
@@ -858,7 +851,7 @@ that demos well and a system that can be trusted in production.
 
 The real promise of agentic systems is not that they can act on their own; it is
 that they can act on our behalf with a level of reliability we are willing to
-stand behind. That kind of confidence is engineered, not prompted.
+stand behind. That kind of confidence needs to be engineered and built into the architecture.
 
 > *The best outputs do not need protection from scrutiny. They earn trust
 > through it.*
