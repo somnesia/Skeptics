@@ -1,0 +1,24 @@
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# IDE
+.vs/
+.vscode/
+*.suo
+*.user
+
+# Build outputs
+bin/
+obj/
+*.dll
+*.exe
+
+# NuGet
+packages/
+*.nupkg
+
+# Secrets
+appsettings.Development.json
+.env

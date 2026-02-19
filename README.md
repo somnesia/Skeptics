@@ -1,0 +1,64 @@
+# Team of Skeptics
+
+**A reusable quality architecture for AI agent systems.**
+
+> *The best outputs do not need protection from scrutiny. They earn trust through it.*
+
+## What This Is
+
+A pattern and service layer that adds structured adversarial review to any AI agent pipeline. Five specialised skeptic agents — each with a single, non-overlapping mandate — challenge agent output before it becomes a decision.
+
+| Skeptic | Mandate | Question |
+|---------|---------|----------|
+| **Improver** | Output optimisation | "Could this be better?" |
+| **Falsifier** | Adversarial review | "Can I prove this is false?" |
+| **Auditor** | Evidence assessment | "Do I believe this? Show me the source." |
+| **Cross-Checker** | Consistency verification | "Does this align with what other agents produced?" |
+| **Closer** | Completeness assurance | "Did we deliver everything we said we would?" |
+
+## Why It Matters
+
+Most agent pipelines trust unchallenged AI output as source of truth. This pattern inserts deterministic checkpoints and adversarial evaluation at every handoff — the difference between a system that demos well and one that can be trusted in production.
+
+## Published
+
+- **LinkedIn article:** ["Why Agents Need a Team of Skeptics"](https://www.linkedin.com/pulse/why-agents-need-team-skeptics-michael-mcclary-y8bac/) — Feb 2026
+
+## Project Structure
+
+```
+Skeptics/
+├── README.md               ← You are here
+├── docs/
+│   └── team-of-skeptics.md ← Foundational reference (context, prompts, code, anti-patterns)
+├── src/                    ← Future: Semantic Kernel C# implementation
+│   └── (empty — next step)
+├── prompts/                ← Future: Versioned system prompts as standalone files
+│   └── (empty — next step)
+└── examples/               ← Future: Sample inputs + expected skeptic reports
+    └── (empty — next step)
+```
+
+## Key Decisions
+
+| Date | Decision | Rationale |
+|------|----------|-----------|
+| 2026-02-18 | Five skeptics, not one super-reviewer | Single mandates produce dramatically better results than multi-mandate prompts |
+| 2026-02-18 | Deterministic middleware, not AI gatekeeping | Go/no-go decisions made by code, never by another AI |
+| 2026-02-18 | Semantic Kernel (C#) for reference impl | Matches .NET background, Microsoft ecosystem |
+| 2026-02-19 | Separated into own project | Pattern is framework-agnostic; deserves its own repo, not buried in MinecraftBuilder |
+
+## Build Order
+
+1. [ ] Extract C# code example into compilable `src/` project
+2. [ ] Extract system prompts into versioned `prompts/` files
+3. [ ] Create example inputs with known errors for testing
+4. [ ] Wire up Azure OpenAI and run end-to-end
+5. [ ] Build as NuGet package / shared library
+6. [ ] Integrate into Minecraft Builder pipeline as first consumer
+7. [ ] Write follow-up article with real production results
+
+## Source Material
+
+- [Foundational reference doc](docs/team-of-skeptics.md) — full context, all five skeptic definitions, structured prompts, C# code example, anti-patterns, extension guide
+- [LinkedIn article](https://www.linkedin.com/pulse/why-agents-need-team-skeptics-michael-mcclary-y8bac/) — published summary
