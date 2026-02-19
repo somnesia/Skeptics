@@ -1,4 +1,4 @@
-# The Team of Skeptics: A Quality Architecture for AI Agent Systems
+# The Team of Skeptics: Enhancing Quality for AI Agent Systems
 
 *Michael McClary — February 2026*
 *Companion to: ["Why Agents Need a Team of Skeptics"](https://www.linkedin.com/pulse/why-agents-need-team-skeptics-michael-mcclary-y8bac/)*
@@ -34,7 +34,7 @@ User Request → Agent does work → Output delivered
 
 The agent that *produces* the work is also implicitly trusted to *evaluate* its own
 work. This is the equivalent of letting a student grade their own exam. The output
-may be fluent, confident, properly formatted — and completely wrong.
+may be fluent, confident, properly formatted... and completely wrong.
 
 In traditional software, we solved this decades ago. We don't ship code without
 tests. We don't merge without review. We don't deploy without monitoring. But in
@@ -61,15 +61,15 @@ layer that challenges the *substance* of the work.
 ### Why This Happens
 
 1. **The fluency trap.** LLM outputs are grammatically perfect and stylistically
-   confident regardless of factual accuracy. Human reviewers — and downstream
-   agents — are biased toward trusting well-written text.
+   confident regardless of factual accuracy. Human reviewers, and frequently downstream
+   agents, are biased toward trusting well-written text.
 
 2. **The single-perspective problem.** One agent, one prompt, one pass. The agent
    has no adversarial pressure, no competing hypothesis, no reason to doubt itself.
    It optimises for plausible completion, not correctness.
 
 3. **The verification afterthought.** Quality checks, if they exist, are bolted on
-   at the end: "review this for errors." This is too late — errors compound through
+   at the end: "review this for errors." This is too late; errors compound through
    multi-step pipelines, and a single review pass at the end can't untangle them.
 
 4. **The missing feedback loop.** When outputs are wrong, there's no structured
@@ -87,8 +87,7 @@ layer that challenges the *substance* of the work.
 Feynman described his trust in a scientific theory as: *"I have not yet found a
 way to prove it wrong."* Trust in our systems should be the result of structured
 attempts to find fault. Where Colin Chapman added lightness to Lotus, the path
-to reliable and predictable behaviour in multi-agent systems is to **add scrutiny**
-— with well-formed, hardened skeptics.
+to reliable and predictable behaviour in multi-agent systems is to **add scrutiny** with well-formed, hardened skeptics.
 
 The scientific method doesn't trust any single experiment. It requires independent
 replication, peer review, and active attempts at falsification. A hypothesis only
@@ -123,8 +122,7 @@ provide systematic, multi-dimensional verification.
 
 5. **Deterministic middleware, not AI gatekeeping.** The *decision* about what to
    do with skeptic findings (retry, escalate, approve, reject) is made by
-   deterministic code, not by another AI. Never let AI talk directly to AI in a
-   trust chain.
+   deterministic code, not by another AI. 
 
 ---
 
@@ -135,8 +133,8 @@ provide systematic, multi-dimensional verification.
 Not because it might one day send your Tesla off the Golden Gate Bridge, but
 because today it will quietly turn a rounding error into a business decision.
 
-Between every AI agent, there must be a deterministic middleware layer — code you
-wrote, with logic you can inspect — that:
+Between every AI agent, there must be a deterministic middleware layer: code you
+wrote, with logic you can inspect, that:
 
 - Validates the output schema (did the agent return what it was supposed to?)
 - Checks hard constraints (did it exceed token limits? cost thresholds? time?)
@@ -148,10 +146,10 @@ have a game of telephone between probabilistic systems, each compounding the
 errors of the last.
 
 ```
-┌──────────┐     ┌─────────────────┐     ┌──────────┐
+┌──────────┐       ┌─────────────────┐      ┌──────────┐
 │ Agent A   │────▶│  MIDDLEWARE      │────▶│ Agent B   │
-│ (produce) │     │  - Schema check  │     │ (consume) │
-└──────────┘     │  - Constraints   │     └──────────┘
+│ (produce) │     │  - Schema check  │      │ (consume) │
+└──────────┘     │  - Constraints   │       └──────────┘
                   │  - Routing logic  │
                   │  - Decision gate  │
                   └─────────────────┘
@@ -162,7 +160,7 @@ errors of the last.
 ## The Five Skeptics
 
 Each skeptic has a single, non-overlapping mandate. They are named for their
-function, not for a persona — because in production systems, clarity beats
+function, not for a persona, because in production systems, clarity beats
 creativity.
 
 ### Overview
@@ -192,7 +190,7 @@ creativity.
 
 **When to use:**
 - After a first draft of any content-heavy output (reports, narratives, plans)
-- Early in the pipeline — improvements are cheaper to make before verification
+- Early in the pipeline; improvements are cheaper to make before verification
 - For creative or strategic outputs where "correct" is less important than "complete and insightful"
 
 **Failure mode to watch for:**
@@ -222,13 +220,13 @@ cap the number of improvement cycles and filter by severity.
 - When the cost of being wrong exceeds the cost of extra verification
 
 **Failure mode to watch for:**
-The Falsifier may flag true statements as uncertain. This is by design — it
+The Falsifier may flag true statements as uncertain. This is by design so that it
 creates a *triage list*, not a verdict. Deterministic middleware decides which
 flags warrant action.
 
 **Why this is the most important skeptic:**
-Most review prompts ask "is this correct?" — which biases toward confirmation.
-The Falsifier asks "how could this be wrong?" — which biases toward discovery.
+Most review prompts ask "is this correct?" which biases toward confirmation.
+The Falsifier asks "how could this be wrong?" which biases toward discovery.
 This epistemic inversion is the single most valuable quality intervention in
 any AI pipeline.
 
@@ -261,7 +259,7 @@ it flags claims as "unverifiable" rather than "wrong." Pair with a RAG pipeline
 or tool-calling agent that can actually retrieve and check sources.
 
 **Implementation note:**
-The Auditor is often most effective when paired with tool access — web search,
+The Auditor is often most effective when paired with tool access; web search,
 document retrieval, database queries. A "blind" Auditor (no tools) can still
 identify *structural* citation problems (missing citations, suspicious specificity),
 but a "sighted" Auditor (with tools) can verify content.
@@ -397,7 +395,7 @@ outputs of earlier ones:
 
 ### The Retry Loop
 
-When skeptics find issues, the system doesn't just report them — it acts:
+When skeptics find issues, the system doesn't just report them, it acts:
 
 ```
 Severity: CRITICAL  → Automatic retry with findings injected into producer prompt
@@ -444,18 +442,16 @@ Not every output needs all five skeptics. Match the combination to the risk:
 
 ## Designing for Reuse: The Skeptic Service Layer
 
-The skeptics should be built as a **shared service layer** — a set of functions or
-microservices that any agent pipeline can call, not code duplicated into each
-individual project.
+The skeptics should be built as a **shared service layer**
 
 ### Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    YOUR AGENT PIPELINES                      │
+│                    YOUR AGENT PIPELINES                     │
 │                                                             │
 │  Pipeline A    Pipeline B    Pipeline C    Pipeline D       │
-│  (DB Visualizer) (HR App)  (Reports)    (Code Gen)           │
+│  (DB Visualizer) (HR App)     (Reports)    (Code Gen)       │
 │       │             │            │             │            │
 └───────┼─────────────┼────────────┼─────────────┼────────────┘
         │             │            │             │
@@ -563,7 +559,7 @@ the `SkepticRequest`.
 ### Improver System Prompt
 
 ```
-You are the Improver — a quality agent whose mandate is to identify gaps,
+You are the Improver: a quality agent whose mandate is to identify gaps,
 weaknesses, and enhancement opportunities in the provided content.
 
 Your job is NOT to verify facts, check citations, or detect contradictions.
@@ -591,7 +587,7 @@ improve, return an empty array.
 ### Falsifier System Prompt
 
 ```
-You are the Falsifier — a quality agent whose sole purpose is to find
+You are the Falsifier: a quality agent whose sole purpose is to find
 claims that might be wrong and propose ways to test them.
 
 You operate on the principle that any claim worth making is worth testing.
@@ -628,7 +624,7 @@ the JSON structure.
 ### Auditor System Prompt
 
 ```
-You are the Auditor — a quality agent whose mandate is citation
+You are the Auditor: a quality agent whose mandate is citation
 verification and source traceability.
 
 Your job is to ensure that every factual claim, statistic, and reference
@@ -667,7 +663,7 @@ the JSON structure.
 ### Cross-Checker System Prompt
 
 ```
-You are the Cross-Checker — a quality agent whose mandate is detecting
+You are the Cross-Checker: a quality agent whose mandate is detecting
 contradictions and inconsistencies.
 
 You will receive the content to evaluate AND additional context (prior
@@ -710,7 +706,7 @@ the JSON structure.
 ### Closer System Prompt
 
 ```
-You are the Closer — a quality agent whose mandate is verifying that the
+You are the Closer: a quality agent whose mandate is verifying that the
 output fully satisfies the original requirements.
 
 You will receive the content to evaluate AND the original requirements.
@@ -830,10 +826,6 @@ add specialised skeptics:
 - **Karl Popper**, *The Logic of Scientific Discovery* (1959)
   — Falsificationism: a theory's strength is measured by its ability to survive
   attempts at disproof, not by the number of confirmations.
-
-- **Microsoft Semantic Kernel**
-  — [github.com/microsoft/semantic-kernel](https://github.com/microsoft/semantic-kernel)
-  — The agent framework used in the code example.
 
 - **Adversarial Collaboration** (Kahneman & Klein, 2009)
   — A structured methodology where researchers with opposing hypotheses work
